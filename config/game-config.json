@@ -1,0 +1,19 @@
+{
+  "game": {
+    "name": "Autochess",
+    "version": "0.1.0"
+  },
+  "board": {
+    "width": 8,
+    "height": 8
+  },
+  "player": {
+    "maxHealth": 100,
+    "maxGold": 100,
+    "maxRerolls": 5
+  },
+  "battle": {
+    "roundTime": 30,
+    "prepTime": 30
+  }
+}
