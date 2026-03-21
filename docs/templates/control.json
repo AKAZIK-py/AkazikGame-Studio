@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "run_id": "{{RUN_ID}}",
+  "agent_id": "{{AGENT_ID}}",
+  "task": "{{TASK_NAME}}",
+  "started_at": "{{START_TIME}}",
+  "completed_at": "{{END_TIME}}",
+  "status": "{{STATUS:pending|running|success|partial|failure}}",
+  "branch": "chore/bootstrap-agent-workflow",
+  "pr": null,
+  "steps": [
+    {
+      "id": 1,
+      "name": "{{STEP_NAME}}",
+      "status": "{{STATUS:pending|done|skip}}",
+      "output": null,
+      "error": null
+    }
+  ],
+  "files_changed": [],
+  "evidence_refs": [],
+  "lessons": []
+}
