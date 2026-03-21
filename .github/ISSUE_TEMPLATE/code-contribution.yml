@@ -1,0 +1,70 @@
+name: 📝 Code Contribution
+description: Submit a code contribution proposal or improvement
+title: "[Contribution] "
+labels: ["contribution", "enhancement"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 📝 代码贡献提案
+
+        欢迎提交代码贡献提案！请填写以下内容。
+
+  - type: dropdown
+    id: contribution-type
+    attributes:
+      label: 贡献类型
+      options:
+        - Feature Enhancement（功能增强）
+        - Bug Fix（Bug修复）
+        - Performance Optimization（性能优化）
+        - Refactoring（重构）
+        - Documentation（文档改进）
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 详细描述
+      placeholder: "请详细描述你的贡献内容、解决什么问题、为什么这样做"
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical-design
+    attributes:
+      label: 技术设计（可选）
+      placeholder: "简要说明技术实现方案，涉及哪些文件、模块"
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 替代方案（可选）
+      placeholder: "如果有其他实现方案，请说明为什么选择当前方案"
+    validations:
+      required: false
+
+  - type: textarea
+    id: testing-plan
+    attributes:
+      label: 测试计划（可选）
+      placeholder: "如何验证这个贡献的正确性？"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: readiness
+    attributes:
+      label: 准备状态
+      options:
+        - label: "我有初步的实现代码"
+          required: false
+        - label: "需要讨论后再开始实现"
+          required: false
+        - label: "愿意接受任务分配"
+          required: false
+
