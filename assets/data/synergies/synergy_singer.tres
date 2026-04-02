@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SynergyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/foundation/synergy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "singer"
+display_name = "歌手"
+type = "normal"
+thresholds = [2, 4]
+effect_ids = ["singer_skill_damage_1", "singer_skill_damage_2"]
+effect_descriptions = ["技能伤害+15%", "技能伤害+35%"]
+icon_path = ""

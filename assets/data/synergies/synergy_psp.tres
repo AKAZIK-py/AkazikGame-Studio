@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SynergyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/foundation/synergy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "psp"
+display_name = "PSP"
+type = "normal"
+thresholds = [2]
+effect_ids = ["psp_team_buff"]
+effect_descriptions = ["全体友军攻击力+8%"]
+icon_path = ""

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SynergyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/foundation/synergy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "deer"
+display_name = "狍子"
+type = "wildcard"
+thresholds = [1]
+effect_ids = ["wildcard_synergy"]
+effect_descriptions = ["可计入任意羁绊的阈值"]
+icon_path = ""

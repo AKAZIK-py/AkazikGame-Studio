@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SynergyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/foundation/synergy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "idol"
+display_name = "偶像"
+type = "normal"
+thresholds = [2, 4, 5]
+effect_ids = ["idol_health_1", "idol_health_2", "idol_health_3"]
+effect_descriptions = ["生命值+10%", "生命值+25%", "生命值+40%"]
+icon_path = ""

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/foundation/character_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "a_zi"
+display_name = "阿梓"
+rarity = 3
+role = "core"
+base_attack = 70
+base_health = 750
+synergy_tags = ["VR", "singer", "candy"]
+skill_name = "分身协同"
+skill_description = "每6次攻击生成分身协同攻击"
+skill_trigger_type = "on_attack_count"
+skill_trigger_param = 6
+skill_effect_id = "azi_clone_attack"
+flavor_story_hint = "上海KTV"
+flavor_defeat_line = ""

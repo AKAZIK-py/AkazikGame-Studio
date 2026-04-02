@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/foundation/character_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "hirro"
+display_name = "hirro"
+rarity = 2
+role = "output"
+base_attack = 65
+base_health = 600
+synergy_tags = ["gunslinger"]
+skill_name = "单挂强化"
+skill_description = "当周围6格无其他棋子时，攻击力和生命值大幅提升"
+skill_trigger_type = "passive"
+skill_trigger_param = 0
+skill_effect_id = "hirro_solo_bonus"
+flavor_story_hint = ""
+flavor_defeat_line = ""

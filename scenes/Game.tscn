@@ -1,0 +1,253 @@
+[gd_scene format=3 uid="uid://t03s48gamsf8"]
+
+[ext_resource type="Script" uid="uid://d13kxccebx5lc" path="res://src/core/game.gd" id="1_game"]
+[ext_resource type="Script" uid="uid://c8iwhskf3pbbv" path="res://src/core/board_system.gd" id="2_board"]
+[ext_resource type="Script" uid="uid://bibtnctbqkk7b" path="res://src/presentation/board_renderer.gd" id="3_renderer"]
+[ext_resource type="Script" uid="uid://cm14xtkt8xtsa" path="res://src/presentation/cell_display_system.gd" id="4_cell_display"]
+[ext_resource type="Script" uid="uid://d3rqd8jtadq78" path="res://src/gameplay/card_pool_manager.gd" id="5_card_pool"]
+[ext_resource type="Script" uid="uid://c1im8i715a76d" path="res://src/gameplay/shop_system.gd" id="6_shop"]
+[ext_resource type="Script" uid="uid://dayhbca8bgjbn" path="res://src/gameplay/drag_drop_controller.gd" id="7_drag"]
+[ext_resource type="Script" uid="uid://cgnevdm3d113s" path="res://src/ui/shop_panel.gd" id="8_shop_panel"]
+[ext_resource type="Script" uid="uid://ue085v2qb8j6" path="res://src/gameplay/synergy_detection_system.gd" id="9_synergy_detection"]
+[ext_resource type="Script" uid="uid://dvyjr6slb8gsy" path="res://src/gameplay/synergy_effect_system.gd" id="10_synergy_effect"]
+[ext_resource type="Script" uid="uid://dmrqsi0kbrgu2" path="res://src/gameplay/attribute_calculation_system.gd" id="11_attribute_calc"]
+[ext_resource type="Script" uid="uid://c7qubande8tv" path="res://src/gameplay/battle_system.gd" id="12_battle"]
+[ext_resource type="Script" uid="uid://dcipupxcidvp6" path="res://src/ui/battle_result_panel.gd" id="13_battle_result"]
+[ext_resource type="Script" uid="uid://d14ifp8itgc0c" path="res://src/ui/synergy_panel.gd" id="14_synergy_panel"]
+[ext_resource type="Script" uid="uid://ccmsatrtsekjx" path="res://src/presentation/character_renderer.gd" id="15_character_renderer"]
+[ext_resource type="Script" uid="uid://br2wj87qj4ocl" path="res://src/ui/enemy_select_panel.gd" id="17_enemy_select"]
+[ext_resource type="Script" uid="uid://cqlek7ywpi7v5" path="res://src/gameplay/star_upgrade_system.gd" id="18_star_upgrade"]
+[ext_resource type="Script" uid="uid://battle_timeline" path="res://src/gameplay/battle_timeline_system.gd" id="19_timeline"]
+[ext_resource type="Script" uid="uid://battle_ai" path="res://src/gameplay/battle_ai_system.gd" id="20_ai"]
+[ext_resource type="Script" uid="uid://battle_animation" path="res://src/gameplay/battle_animation_system.gd" id="21_animation"]
+[ext_resource type="Script" uid="uid://battle_log" path="res://src/gameplay/battle_log_system.gd" id="22_log"]
+[ext_resource type="Script" uid="uid://battle_log_panel" path="res://src/ui/battle_log_panel.gd" id="23_log_panel"]
+[ext_resource type="Script" uid="uid://battle_control_panel" path="res://src/ui/battle_control_panel.gd" id="24_control_panel"]
+
+[node name="Game" type="Node2D" unique_id=1483075084]
+script = ExtResource("1_game")
+
+[node name="BoardSystem" type="Node" parent="." unique_id=1483068067]
+script = ExtResource("2_board")
+
+[node name="BoardRenderer" type="Node2D" parent="." unique_id=397806134]
+script = ExtResource("3_renderer")
+
+[node name="CharacterRenderer" type="Node2D" parent="." unique_id=998877665]
+script = ExtResource("15_character_renderer")
+
+[node name="CellDisplaySystem" type="Node" parent="." unique_id=1593694808]
+script = ExtResource("4_cell_display")
+
+[node name="CardPoolManager" type="Node" parent="." unique_id=2137948116]
+script = ExtResource("5_card_pool")
+
+[node name="ShopSystem" type="Node" parent="." unique_id=1413427166]
+script = ExtResource("6_shop")
+
+[node name="DragDropController" type="Node" parent="." unique_id=1641241786]
+script = ExtResource("7_drag")
+
+[node name="SynergyDetectionSystem" type="Node" parent="." unique_id=1743271393]
+script = ExtResource("9_synergy_detection")
+
+[node name="SynergyEffectSystem" type="Node" parent="." unique_id=2027532310]
+script = ExtResource("10_synergy_effect")
+
+[node name="AttributeCalculationSystem" type="Node" parent="." unique_id=442185194]
+script = ExtResource("11_attribute_calc")
+
+[node name="BattleSystem" type="Node" parent="." unique_id=1027528379]
+script = ExtResource("12_battle")
+
+[node name="StarUpgradeSystem" type="Node" parent="." unique_id=112233445]
+script = ExtResource("18_star_upgrade")
+
+[node name="BattleTimelineSystem" type="Node" parent="." unique_id=223344556]
+script = ExtResource("19_timeline")
+
+[node name="BattleAISystem" type="Node" parent="." unique_id=334455667]
+script = ExtResource("20_ai")
+
+[node name="BattleAnimationSystem" type="Node" parent="." unique_id=445566778]
+script = ExtResource("21_animation")
+
+[node name="BattleLogSystem" type="Node" parent="." unique_id=556677889]
+script = ExtResource("22_log")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=2084515621]
+
+[node name="ShopPanel" type="Control" parent="UI" unique_id=5595649]
+layout_mode = 3
+anchors_preset = 10
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -90.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("8_shop_panel")
+
+[node name="SlotsContainer" type="HBoxContainer" parent="UI/ShopPanel" unique_id=492369363]
+layout_mode = 1
+anchors_preset = 10
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -80.0
+offset_right = -130.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 16
+
+[node name="EnemySelectPanel" type="Control" parent="UI" unique_id=556677889]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 240.0
+grow_horizontal = 0
+script = ExtResource("17_enemy_select")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="UI/ShopPanel" unique_id=1970887279]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = -80.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 6
+
+[node name="BattleButton" type="Button" parent="UI/ShopPanel/ButtonContainer" unique_id=1970887281]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "开始战斗"
+
+[node name="RefreshButton" type="Button" parent="UI/ShopPanel/ButtonContainer" unique_id=1938502476]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "刷新"
+
+[node name="BattleResultPanel" type="Control" parent="UI" unique_id=398692013]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("13_battle_result")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/BattleResultPanel" unique_id=1459823753]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="UI/BattleResultPanel/VBoxContainer" unique_id=1176302459]
+layout_mode = 2
+text = "战斗结果"
+horizontal_alignment = 1
+
+[node name="WinRateLabel" type="Label" parent="UI/BattleResultPanel/VBoxContainer" unique_id=926877355]
+layout_mode = 2
+text = "胜率: 50%"
+horizontal_alignment = 1
+
+[node name="ResultLabel" type="Label" parent="UI/BattleResultPanel/VBoxContainer" unique_id=2126047933]
+layout_mode = 2
+text = "胜利！"
+horizontal_alignment = 1
+
+[node name="PowerLabel" type="Label" parent="UI/BattleResultPanel/VBoxContainer" unique_id=1620021765]
+layout_mode = 2
+text = "战力对比"
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="HBoxContainer" parent="UI/BattleResultPanel/VBoxContainer" unique_id=88019314]
+layout_mode = 2
+alignment = 1
+
+[node name="ContinueButton" type="Button" parent="UI/BattleResultPanel/VBoxContainer/ButtonContainer" unique_id=587988450]
+layout_mode = 2
+text = "继续"
+
+[node name="ResetButton" type="Button" parent="UI/BattleResultPanel/VBoxContainer/ButtonContainer" unique_id=236666370]
+layout_mode = 2
+text = "重置"
+
+[node name="SynergyPanel" type="Control" parent="UI" unique_id=1806342019]
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 30.0
+offset_right = 160.0
+offset_bottom = -150.0
+grow_vertical = 2
+script = ExtResource("14_synergy_panel")
+
+[node name="BattleLogPanel" type="Control" parent="UI" unique_id=667788990]
+visible = false
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 30.0
+offset_right = 200.0
+offset_bottom = -100.0
+grow_vertical = 2
+script = ExtResource("23_log_panel")
+
+[node name="BattleControlPanel" type="Control" parent="UI" unique_id=778899001]
+visible = false
+layout_mode = 3
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -220.0
+offset_top = -45.0
+offset_right = -10.0
+offset_bottom = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("24_control_panel")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI/SynergyPanel" unique_id=446960271]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/SynergyPanel/ScrollContainer" unique_id=706032371]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UI/SynergyPanel" unique_id=2047849591]
+layout_mode = 1
+text = "羁绊状态"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=64694968]
+position = Vector2(800, 450)

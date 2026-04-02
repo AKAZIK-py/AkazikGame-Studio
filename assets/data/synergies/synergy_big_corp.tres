@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SynergyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/foundation/synergy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "big_corp"
+display_name = "大厂"
+type = "hidden"
+thresholds = [1]
+effect_ids = []
+effect_descriptions = ["隐藏羁绊，暂不激活"]
+icon_path = ""

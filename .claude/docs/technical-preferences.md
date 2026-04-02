@@ -5,44 +5,53 @@
 
 ## Engine & Language
 
-- **Engine**: [TO BE CONFIGURED — run /setup-engine]
-- **Language**: [TO BE CONFIGURED]
-- **Rendering**: [TO BE CONFIGURED]
-- **Physics**: [TO BE CONFIGURED]
+- **Engine**: Godot 4.6
+- **Language**: GDScript (primary)
+- **Rendering**: 2D + 透视模拟（倾斜45度视角）
+- **Physics**: Godot Physics (内置)
 
 ## Naming Conventions
 
-- **Classes**: [TO BE CONFIGURED]
-- **Variables**: [TO BE CONFIGURED]
-- **Signals/Events**: [TO BE CONFIGURED]
-- **Files**: [TO BE CONFIGURED]
-- **Scenes/Prefabs**: [TO BE CONFIGURED]
-- **Constants**: [TO BE CONFIGURED]
+### GDScript Standard
+
+- **Classes**: PascalCase (e.g., `PlayerController`, `SynergyDetector`)
+- **Variables**: snake_case (e.g., `move_speed`, `current_health`)
+- **Functions**: snake_case (e.g., `take_damage()`, `calculate_win_rate()`)
+- **Signals**: snake_case past tense (e.g., `health_changed`, `synergy_activated`)
+- **Files**: snake_case matching class (e.g., `player_controller.gd`, `synergy_detector.gd`)
+- **Scenes**: PascalCase matching root node (e.g., `GameBoard.tscn`, `ShopUI.tscn`)
+- **Constants**: UPPER_SNAKE_CASE (e.g., `MAX_HEALTH`, `GRID_SIZE`)
+
+### Project-Specific
+
+- **角色数据文件**: `character_[name].tres` (e.g., `character_azi.tres`)
+- **羁绊数据文件**: `synergy_[type].tres` (e.g., `synergy_vr.tres`)
+- **场景文件**: PascalCase (e.g., `HexBoard.tscn`, `ShopPanel.tscn`)
 
 ## Performance Budgets
 
-- **Target Framerate**: [TO BE CONFIGURED]
-- **Frame Budget**: [TO BE CONFIGURED]
-- **Draw Calls**: [TO BE CONFIGURED]
-- **Memory Ceiling**: [TO BE CONFIGURED]
+- **Target Framerate**: 60fps
+- **Frame Budget**: 16.6ms
+- **Draw Calls**: TBD (profile during development)
+- **Memory Ceiling**: TBD (profile during development)
 
 ## Testing
 
-- **Framework**: [TO BE CONFIGURED]
-- **Minimum Coverage**: [TO BE CONFIGURED]
-- **Required Tests**: Balance formulas, gameplay systems, networking (if applicable)
+- **Framework**: GUT (Godot Unit Test)
+- **Minimum Coverage**: Core systems should have unit tests
+- **Required Tests**: 羁绊检测、属性计算、战斗系统
 
 ## Forbidden Patterns
 
-<!-- Add patterns that should never appear in this project's codebase -->
-- [None configured yet — add as architectural decisions are made]
+- 不要在 `_process()` 中进行复杂计算，使用事件驱动
+- 不要硬编码数值，所有游戏数值应该来自资源文件
+- 不要直接访问其他节点的内部状态，使用信号通信
 
 ## Allowed Libraries / Addons
 
-<!-- Add approved third-party dependencies here -->
-- [None configured yet — add as dependencies are approved]
+- GUT (Godot Unit Test) — 单元测试框架
+- 其他库待定，按需添加
 
 ## Architecture Decisions Log
 
-<!-- Quick reference linking to full ADRs in docs/architecture/ -->
-- [No ADRs yet — use /architecture-decision to create one]
+- **ADR-0001**: 核心架构设计 (渲染方案、状态管理、数据驱动) — Accepted

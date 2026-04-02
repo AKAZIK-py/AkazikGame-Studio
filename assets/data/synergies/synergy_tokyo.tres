@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SynergyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/foundation/synergy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "tokyo"
+display_name = "东京"
+type = "normal"
+thresholds = [1]
+effect_ids = ["tokyo_solo_buff"]
+effect_descriptions = ["攻击力+5%，生命值+5%"]
+icon_path = ""

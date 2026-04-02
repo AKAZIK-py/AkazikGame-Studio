@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SynergyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/foundation/synergy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "eoe_sisters"
+display_name = "EOE姐妹"
+type = "combo"
+thresholds = [2]
+effect_ids = ["eoe_sisters_combo"]
+effect_descriptions = ["露早+柚恩同时在场时，攻击力×1.76，生命值×1.5"]
+icon_path = ""

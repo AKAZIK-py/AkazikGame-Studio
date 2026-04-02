@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/foundation/character_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "bai_shen_yao"
+display_name = "白神遥"
+rarity = 2
+role = "tank"
+base_attack = 48
+base_health = 780
+synergy_tags = ["psp", "candy"]
+skill_name = ""
+skill_description = ""
+skill_trigger_type = "none"
+skill_trigger_param = 0
+skill_effect_id = ""
+flavor_story_hint = ""
+flavor_defeat_line = ""

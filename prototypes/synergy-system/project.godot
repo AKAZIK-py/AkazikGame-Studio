@@ -1,0 +1,24 @@
+; PROTOTYPE - NOT FOR PRODUCTION
+; Question: 羁绊检测和效果应用是否正确工作？
+; Date: 2026-03-28
+
+; Engine configuration for prototype
+config_version=5
+
+[application]
+
+config/name="Synergy System Prototype"
+run/main_scene="res://synergy_prototype.tscn"
+config/features=PackedStringArray("4.6", "Forward Plus")
+config/icon="res://icon.svg"
+
+[autoload]
+
+[display]
+
+window/size/viewport_width=800
+window/size/viewport_height=600
+
+[rendering]
+
+renderer/rendering_method="forward_plus"

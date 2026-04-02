@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/foundation/character_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "lu_lulu"
+display_name = "雫lulu"
+rarity = 3
+role = "support"
+base_attack = 55
+base_health = 720
+synergy_tags = ["idol", "tokyo"]
+skill_name = ""
+skill_description = ""
+skill_trigger_type = "none"
+skill_trigger_param = 0
+skill_effect_id = ""
+flavor_story_hint = ""
+flavor_defeat_line = ""

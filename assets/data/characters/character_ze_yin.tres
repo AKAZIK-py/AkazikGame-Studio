@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/foundation/character_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "ze_yin"
+display_name = "泽音"
+rarity = 1
+role = "mage"
+base_attack = 52
+base_health = 520
+synergy_tags = ["singer"]
+skill_name = ""
+skill_description = ""
+skill_trigger_type = "none"
+skill_trigger_param = 0
+skill_effect_id = ""
+flavor_story_hint = ""
+flavor_defeat_line = ""

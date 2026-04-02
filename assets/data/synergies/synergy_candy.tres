@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="SynergyData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/foundation/synergy_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "candy"
+display_name = "糖"
+type = "normal"
+thresholds = [2, 3]
+effect_ids = ["candy_attack_speed_1", "candy_attack_speed_2"]
+effect_descriptions = ["攻速+15%", "攻速+30%"]
+icon_path = ""

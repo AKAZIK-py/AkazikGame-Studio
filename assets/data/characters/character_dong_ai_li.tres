@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="CharacterData" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://src/foundation/character_data.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "dong_ai_li"
+display_name = "东爱璃"
+rarity = 3
+role = "support"
+base_attack = 52
+base_health = 700
+synergy_tags = ["psp", "deer"]
+skill_name = "万能羁绊"
+skill_description = "可计入任意羁绊的阈值"
+skill_trigger_type = "passive"
+skill_trigger_param = 0
+skill_effect_id = "wildcard_synergy"
+flavor_story_hint = ""
+flavor_defeat_line = ""
