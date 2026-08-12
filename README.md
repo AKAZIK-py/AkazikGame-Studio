@@ -1,46 +1,34 @@
 # Game_Autochess
 
-自走棋游戏项目
+用于筹备 Game_Autochess 项目的 OpenClaw Agent 工作区。
 
-## 技术栈
+## 当前状态
 
-- **引擎**: Unity
-- **语言**: C#
+仓库目前包含 Agent 配置、可复用技能、贡献流程和任务运行记录；尚未加入 Unity 工程或游戏源码。因此当前仓库不能直接用 Unity 打开，`Assets/`、`Packages/`、`ProjectSettings/` 等目录将在游戏工程正式初始化后再补充。
 
 ## 目录结构
 
-```
+```text
 Game_Autochess/
-├── Assets/                 # Unity 资源
-│   ├── Scripts/            # C# 脚本
-│   │   ├── Core/           # 核心逻辑
-│   │   ├── Entities/       # 游戏实体
-│   │   ├── Systems/        # 游戏系统
-│   │   ├── UI/             # UI 控制器
-│   │   └── Utils/          # 工具类
-│   ├── Prefabs/            # 预制体
-│   ├── Scenes/             # 场景
-│   ├── Art/                # 美术资源
-│   ├── Audio/              # 音频
-│   └── Resources/          # 动态加载资源
-├── Packages/               # Unity 包
-├── ProjectSettings/        # 项目设置
-├── docs/                   # 文档
-├── skills/                 # OpenClaw 技能
-├── memory/                 # Agent 记忆
-├── config/                 # 配置文件
-└── scripts/                # 工具脚本
+├── .github/              # Issue 与 PR 模板
+├── docs/
+│   ├── templates/        # spec、plan、evidence、control 模板
+│   └── runs/             # Agent 任务运行记录
+├── skills/               # OpenClaw 技能及其脚本、参考资料与资源
+├── AGENTS.md             # Agent 工作区约定
+├── BOOTSTRAP.md          # 首次启动说明
+├── CONTRIBUTING.md       # 贡献流程
+├── HEARTBEAT.md          # 主动检查清单
+├── IDENTITY.md           # Agent 身份配置
+├── SOUL.md               # Agent 行为与价值约定
+├── TOOLS.md              # 本地工具说明
+└── USER.md               # 用户偏好与上下文
 ```
 
-## 开发指南
+## 使用与贡献
 
-1. 克隆仓库
-2. 使用 Unity 2021.3+ 打开项目
-3. 打开 `Assets/Scenes/Main.unity` 场景
+1. 阅读 `AGENTS.md` 与 `BOOTSTRAP.md`，按当前工作区约定完成初始化。
+2. 提交改动前阅读 `CONTRIBUTING.md`。
+3. 新任务使用 `docs/templates/` 中的模板，并在 `docs/runs/` 中保留可核验的运行记录。
 
-## 工作流
-
-本项目使用 OpenClaw Agent 工作流：
-- `docs/templates/spec.md` — 规格文档
-- `docs/templates/plan.md` — 执行计划
-- `docs/templates/evidence.md` — 验收证据
+Unity 版本、首个场景路径和游戏源码布局尚未确定；在相关文件真正加入仓库前，不应把这些规划写成可执行的开发步骤。
