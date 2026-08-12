@@ -1,7 +1,7 @@
 name: 📝 Code Contribution
 description: Submit a code contribution proposal or improvement
 title: "[Contribution] "
-labels: ["contribution", "enhancement"]
+labels: ["enhancement"]
 assignees: []
 body:
   - type: markdown
@@ -67,4 +67,3 @@ body:
           required: false
         - label: "愿意接受任务分配"
           required: false
-

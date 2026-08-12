@@ -13,7 +13,7 @@
       "id": 1,
       "name": "Check repository status",
       "status": "done",
-      "output": "Repository root confirmed at /Users/twzl/.qclaw/workspace, GitHub CLI authenticated",
+      "output": "Repository root confirmed, GitHub CLI authenticated",
       "error": null
     },
     {

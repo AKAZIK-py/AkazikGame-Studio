@@ -87,4 +87,3 @@ spec → plan → evidence → control
 - 所有技能安装前必须通过 `skill-vetter` 审查
 - 不运行未经批准的外部命令
 - 不修改系统安全配置
-

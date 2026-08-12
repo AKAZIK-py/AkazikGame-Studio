@@ -35,5 +35,4 @@
 
 ## 关联PR
 
-> PR链接将在创建后更新
-
+[PR #2](https://github.com/AKAZIK-py/Game_Autochess/pull/2)
