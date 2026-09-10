@@ -1,0 +1,37 @@
+import {chromium} from 'playwright';
+import {spawn} from 'node:child_process';
+import assert from 'node:assert/strict';
+import path from 'node:path';
+const proc=spawn(process.execPath,['server.mjs'],{env:{...process.env,PORT:'8792',STATIC_DIR:path.resolve('public'),ALLOWED_ORIGINS:'http://127.0.0.1:8792'}});
+const wait=ms=>new Promise(r=>setTimeout(r,ms));let browser;let count=0;const errors=[];
+const pass=x=>{count++;console.log('PASS',x);};
+try{
+ await new Promise((r,j)=>{proc.stdout.once('data',r);proc.once('error',j);});
+ browser=await chromium.launch({headless:true,args:['--no-sandbox','--use-angle=swiftshader','--enable-unsafe-swiftshader','--disable-dev-shm-usage']});
+ const page=await browser.newPage({viewport:{width:1440,height:1000}});page.on('pageerror',e=>errors.push(e.message));page.on('console',m=>{if(m.type()==='error')errors.push(m.text());});
+ await page.goto('http://127.0.0.1:8792');await page.waitForFunction(()=>window.inkbound);await wait(1000);
+ const gpu=await page.evaluate(()=>!!document.getElementById('world').getContext('webgl2'));console.log('WEBGL_ACTIVE',gpu);assert.ok(gpu);pass('真实 WebGL2 着色器初始化');
+ await page.screenshot({path:'tests/screenshots/gpu-home.png'});
+ await page.click('#practiceBtn');await wait(400);assert.equal((await page.evaluate(()=>inkbound.inspect())).mode,'practice');pass('练习按钮进入第一人称');
+ const get=()=>page.evaluate(()=>inkbound.inspect());let s=await get(),z=s.state.players.local.z;
+ console.log('BEFORE_MOVE',JSON.stringify({running:s.running,time:s.state.time,z,renderer:s.renderer,modal:await page.locator('#modal').isVisible()}));await page.keyboard.down('w');await wait(1200);await page.keyboard.up('w');s=await get();console.log('AFTER_MOVE',JSON.stringify({running:s.running,time:s.state.time,z:s.state.players.local.z,modal:await page.locator('#modal').isVisible()}));assert.ok(s.state.players.local.z<z-.5);pass('WASD 移动真实改变世界坐标');
+ await page.mouse.move(720,500);await page.mouse.down();await wait(500);await page.mouse.up();s=await get();assert.ok(s.state.players.local.ammo[0]<28);pass('鼠标连续点绘消耗墨水');
+ await page.keyboard.press('r');await page.waitForFunction(()=>inkbound.inspect().state.players.local.ammo[0]===28,{},{timeout:7000});s=await get();assert.equal(s.state.players.local.ammo[0],28);pass('R 补充计时和 HUD 更新');
+ await page.keyboard.press('2');await page.waitForFunction(()=>inkbound.inspect().state.players.local.tool===1);await page.mouse.down();await wait(180);await page.mouse.up();await page.waitForFunction(()=>inkbound.inspect().state.players.local.ammo[1]<8,{},{timeout:5000});assert.ok((await get()).state.players.local.ammo[1]<8);pass('橡皮泵切换与独立墨水');
+ await page.keyboard.press('3');await page.waitForFunction(()=>inkbound.inspect().state.players.local.tool===2);await page.mouse.down({button:'right'});await page.locator('#scope').waitFor({state:'visible',timeout:5000});assert.equal(await page.locator('#scope').isVisible(),true);await page.mouse.up({button:'right'});pass('针管笔精确观察和放大遮罩');
+ await page.keyboard.press('4');await page.waitForFunction(()=>document.getElementById('ammoValue').textContent==='∞');assert.equal((await get()).state.players.local.tool,3);assert.equal(await page.locator('#ammoValue').textContent(),'∞');pass('折纸尺无限使用 HUD');
+ await page.keyboard.press('p');await wait(200);assert.equal(await page.locator('#modal').isVisible(),true);const time=(await get()).state.time;await wait(350);assert.equal((await get()).state.time,time);pass('暂停真正冻结本地模拟');
+ await page.click('#resumeBtn');await wait(250);assert.equal((await get()).running,true);pass('暂停后恢复输入和模拟');
+ await page.screenshot({path:'tests/screenshots/gpu-gameplay.png'});
+ await page.keyboard.press('p');await page.click('#backHomeBtn');await page.click('#soundBtn');assert.equal((await get()).audio.enabled,false);pass('音效开关生效');
+ await page.click('#onlineBtn');await page.fill('#wsAddress','not-a-websocket');await page.click('#connectBtn');assert.match(await page.locator('#netError').textContent(),/有效/);pass('联机地址验证与明确错误');
+ await page.fill('#wsAddress','ws://127.0.0.1:8792');await page.fill('#roomCode','BROWSER1');await page.click('#connectBtn');await wait(500);assert.equal((await get()).mode,'online');pass('网页通过真实 WebSocket 加入服务端房间');
+ const page2=await browser.newPage({viewport:{width:1024,height:900}});await page2.goto('http://127.0.0.1:8792');await page2.waitForFunction(()=>window.inkbound);await page2.click('#onlineBtn');await page2.fill('#wsAddress','ws://127.0.0.1:8792');await page2.fill('#roomCode','BROWSER1');await page2.click('#connectBtn');await wait(600);assert.equal(Object.keys((await page2.evaluate(()=>inkbound.inspect())).state.players).length,2);pass('第二个真实浏览器加入同页');
+ await page2.screenshot({path:'tests/screenshots/multiplayer.png'});
+ await page2.close();await page.close();
+ const mobile=await browser.newPage({viewport:{width:390,height:844},isMobile:true,hasTouch:true});mobile.on('pageerror',e=>errors.push(e.message));await mobile.goto('http://127.0.0.1:8792');await mobile.waitForFunction(()=>window.inkbound);assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);pass('390px 页面无横向滚动溢出');
+ for(const width of [360,375,390]){await mobile.setViewportSize({width,height:844});assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);const rects=await mobile.locator('[data-tool]').evaluateAll(els=>els.map(e=>({x:e.getBoundingClientRect().x,right:e.getBoundingClientRect().right})));assert.ok(rects.every(r=>r.x>=10&&r.right<=width-10));}pass('360/375/390px 文具卡安全边距');
+ await mobile.setViewportSize({width:390,height:844});await mobile.click('#startBtn');await wait(300);assert.equal(await mobile.locator('#touchFire').isVisible(),true);await mobile.locator('#touchFire').tap();await wait(500);assert.ok((await mobile.evaluate(()=>inkbound.inspect())).state.players.local.ammo[0]<28);await mobile.screenshot({path:'tests/screenshots/mobile-gameplay.png'});pass('手机触控入口与 HUD 可见');
+ await mobile.close();assert.deepEqual(errors,[]);pass('完整流程无 JavaScript 或 WebGL 错误');
+ console.log(`BROWSER_RESULT ${count}/${count} passed`);
+}catch(e){console.error('BROWSER_FAIL',e);throw e;}finally{if(browser)await browser.close();proc.kill('SIGTERM');}

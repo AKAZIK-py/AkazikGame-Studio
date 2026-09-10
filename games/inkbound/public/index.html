@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f7f4e9"><title>纸境 INKBOUND · 把冒险画在这一页</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23f7f4e9'/%3E%3Cpath d='M18 45L43 16l7 7-26 27-9 3zM38 22l8 8M16 43l9 8' fill='none' stroke='%23244c9a' stroke-width='3'/%3E%3C/svg%3E"><link rel="stylesheet" href="./style.css"></head>
+<body>
+<svg class="symbols" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="pen" viewBox="0 0 100 40"><path d="M14 29 74 10 81 21 21 36 12 35zM65 13l6 11M22 27l3 8M12 35l8-7M33 25l29-8M73 11l7-3 5 10-5 3"/></symbol>
+<symbol id="eraser" viewBox="0 0 100 40"><path d="m19 25 18-16 44 10-18 17zM19 25v7l43 6 19-14v-5M38 11l-3 17 20 5 9-17M39 16l19 5M40 21l14 4"/></symbol>
+<symbol id="precision" viewBox="0 0 100 40"><path d="m9 31 73-20 3 8-74 17zM9 31l-5 6 7-1M72 13l2 8M38 24l30-8M81 11l9-3 3 8-8 3M30 23l5 6"/></symbol>
+<symbol id="ruler" viewBox="0 0 100 40"><path d="m12 28 72-19 4 14-72 19zM23 25l2 7M31 23l1 4M39 21l2 7M47 19l1 4M55 17l2 7M63 15l1 4M71 13l2 7"/></symbol>
+<symbol id="sound" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM16 8q5 4 0 8M19 5q8 7 0 14"/></symbol>
+<symbol id="expand" viewBox="0 0 24 24"><path d="M9 3H3v6M15 3h6v6M3 15v6h6M21 15v6h-6"/></symbol>
+<symbol id="gear" viewBox="0 0 24 24"><path d="m9 3-1 4-4 1v7l4 1 1 5h6l1-5 5-1V8l-5-1-1-4z"/><circle cx="12" cy="12" r="3"/></symbol>
+</defs></svg>
+<div class="notebook">
+ <header class="header"><a class="brand" href="./" aria-label="纸境首页"><span class="brand-icon">✳</span><div><b>纸境 <em>INKBOUND</em></b><span>A LITTLE CHAOS. A LOT OF INK.</span></div></a><div class="header-note">把冒险，画在这一页。<span class="note-arrow">⤵</span></div><div class="header-right"><span class="version">VOL. 01 / 草稿世界</span><button id="helpBtn" class="text-button">玩法手册 <span>↗</span></button></div></header>
+ <main id="stage" class="stage">
+  <div class="paper-grain"></div><div class="margin-line"></div>
+  <div class="stage-top"><span class="page-label">FIELD NOTES <span>/</span> 第 001 页</span><span id="modeBadge" class="mode-badge"><i></i>单人 · 本地运行</span><div class="top-actions"><button id="soundBtn" class="icon-button" title="音效开关" aria-label="切换音效"><svg><use href="#sound"/></svg></button><button id="settingsBtn" class="icon-button" title="偏好设置" aria-label="偏好设置"><svg><use href="#gear"/></svg></button><button id="fullBtn" class="icon-button" title="全屏" aria-label="全屏"><svg><use href="#expand"/></svg></button></div></div>
+  <section id="home" class="home-panel"><div class="eyebrow"><span class="tiny-star">✧</span> 第一人称 · 纸上波次挑战</div><h1>这一页，<br><span>由你守住。</span><svg viewBox="0 0 330 18"><path d="M4 9q120-14 320-3M10 15q135-14 307-4"/></svg></h1><p class="intro">蓝墨水开始不安分了。<br>带上你的文具，把涂鸦留在页边之外。</p><div class="home-stats"><span><b>04</b> 种随身文具</span><i>·</i><span><b>∞</b> 波墨团挑战</span><i>·</i><span>一张纸的冒险</span></div><button id="startBtn" class="primary-button"><span>开始这一页</span><span>↗</span></button><div class="secondary-actions"><button id="practiceBtn">先练练手</button><span>/</span><button id="onlineBtn">和朋友同页 <small>联机</small></button></div><div class="pencil-note">不必画得完美，别停下就好。</div></section>
+  <div id="sceneNote" class="scene-note"><span>小心这些小墨团 !</span><svg viewBox="0 0 120 90"><path d="M8 8q86-11 72 64m-12-12 12 15 17-8"/></svg></div>
+  <div id="splashStamp" class="splash-stamp"><span>100% BLUE INK</span><b>纯手绘<br>无现实纹理</b><span>0% REAL WORLD</span></div>
+  <div id="gameHud" class="game-hud hidden">
+   <div class="wave-note"><small id="wavePhase">墨团出现</small><div>WAVE <strong id="waveValue">01</strong></div><span id="remaining">待清理 6</span><div class="wave-progress"><i id="waveProgress"></i></div></div>
+   <div class="score-note"><small>本页得分</small><strong id="scoreValue">00000</strong><span id="bestValue">最高 00000</span></div>
+   <div id="crosshair" class="crosshair"><i></i><i></i><i></i><i></i><span></span></div><div id="hitMark" class="hitmark">×</div><div id="hitPoints" class="hit-points"></div>
+   <div id="scope" class="scope hidden"></div>
+   <div class="health-note"><span>纸面完整度 <small>HP</small></span><div><strong id="hpValue">100</strong><small>/ 100</small><span id="healthWord">保持整洁</span></div><div class="health-bar"><i id="healthFill"></i></div></div>
+   <div class="ammo-note"><span id="toolName">速写笔</span><div><strong id="ammoValue">28</strong><small id="reserveValue">/ 168</small></div><span id="reloadHint">R 补充墨水</span><div class="reload-bar"><i id="reloadProgress"></i></div></div>
+   <canvas id="minimap" width="140" height="140" aria-label="墨团位置小地图"></canvas><span class="map-caption">页边雷达</span>
+   <div id="waveBanner" class="wave-banner"></div><div id="smudge" class="smudge"></div>
+   <button id="pauseBtn" class="pause-button">Ⅱ 暂停</button>
+   <div id="touchControls" class="touch-controls"><div id="joystick"><i></i><span>移动</span></div><div id="touchLook">滑动转向</div><button id="touchFire">点绘</button><button id="touchReload">R</button></div>
+  </div>
+  <div id="toolbelt" class="toolbelt"><div class="belt-title">随身文具 <span>YOUR TOOLKIT</span></div><div class="tools"><button class="tool active" data-tool="0"><kbd>1</kbd><svg><use href="#pen"/></svg><b>速写笔</b><span>连续点绘</span><i>✓</i></button><button class="tool" data-tool="1"><kbd>2</kbd><svg><use href="#eraser"/></svg><b>橡皮泵</b><span>近距扩散</span><i>✓</i></button><button class="tool" data-tool="2"><kbd>3</kbd><svg><use href="#precision"/></svg><b>针管笔</b><span>远距校准</span><i>✓</i></button><button class="tool" data-tool="3"><kbd>4</kbd><svg><use href="#ruler"/></svg><b>折纸尺</b><span>近身划线</span><i>✓</i></button></div></div>
+  <div id="toast" class="toast" role="status"></div><div id="loadError" class="load-error hidden"><h2>这一页还没展开</h2><p>浏览器需要支持 WebGL 2，请用新版 Chrome / Edge 开启硬件加速后重试。</p><button onclick="location.reload()">重新加载</button></div>
+ </main>
+ <footer><div class="controls"><span><kbd>W A S D</kbd> 移动</span><span><kbd>鼠标</kbd> 转向 / 左键点绘</span><span><kbd>Shift</kbd> 快走</span><span><kbd>R</kbd> 补充</span><span><kbd>1 — 4</kbd> 切换文具</span><span><kbd>Esc</kbd> 暂停</span></div><span class="footer-mark">MADE OF PAPER & POSSIBILITIES. <b>✧</b></span></footer>
+</div>
+<dialog id="modal"><button id="closeModal" class="close-button" aria-label="关闭">×</button><div id="modalContent"></div></dialog>
+<script type="module" src="./game.js"></script>
+</body></html>

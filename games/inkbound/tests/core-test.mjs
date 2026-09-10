@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import {Simulation,TOOLS,moveBody,rayBox,raySphere,BLOCKS} from '../public/core.mjs';
+let count=0;function test(name,f){f();console.log('PASS',name);count++;}
+const setup=()=>{const s=new Simulation(7);s.breakTime=999;s.addPlayer('p');return [s,s.players.p];};
+const enemy=(x,z,hp=68)=>({id:'test',x,z,r:.72,type:'drifter',hp,maxHp:hp,speed:0,phase:0,stun:0});
+function aim(p,e){p.yaw=-Math.atan2(e.x-p.x,-(e.z-p.z));p.pitch=Math.atan2(e.r+.15-1.62,Math.hypot(e.x-p.x,e.z-p.z));}
+test('四种工具参数与独立弹匣',()=>{assert.equal(TOOLS.length,4);assert.equal(new Set(TOOLS.map(w=>w.rate)).size,4);assert.equal(TOOLS[3].cap,Infinity);});
+test('圆形玩家不能穿过书本',()=>{let p={x:-7,z:10};moveBody(p,0,-10);assert.ok(p.z>=6.7-1e-6);});
+test('场地边界与大位移细分防穿透',()=>{let p={x:0,z:10};moveBody(p,100,0);assert.ok(p.x<=18.6);assert.ok(p.x<11);});
+test('斜向移动速度被归一化',()=>{const[s,p]=setup();const x=p.x,z=p.z;for(let i=0;i<30;i++)s.step(1/60,{p:{forward:1,strafe:1}});assert.ok(Math.abs(Math.hypot(p.x-x,p.z-z)-2.3)<.01);});
+test('射线与盒子遮挡距离',()=>{assert.equal(rayBox({x:6,y:1,z:10},{x:0,y:0,z:-1},BLOCKS[1]),6);});
+test('射线与墨团距离',()=>{assert.ok(Math.abs(raySphere({x:0,y:0,z:10},{x:0,y:0,z:-1},{x:0,y:0,z:0},1)-9)<1e-6);});
+test('速写笔消耗墨水并遵守冷却',()=>{const[s,p]=setup();assert.equal(s.useTool(p),true);assert.equal(p.ammo[0],27);assert.equal(s.useTool(p),false);assert.equal(p.ammo[0],27);});
+test('准确点绘可清除墨团并记分',()=>{const[s,p]=setup();const e=enemy(0,4);s.enemies=[e];aim(p,e);for(let i=0;i<3;i++){p.cooldown=0;s.useTool(p);}assert.equal(s.enemies.length,0);assert.equal(p.score,100);assert.equal(p.cleared,1);});
+test('橡皮泵发出八条扩散路径',()=>{const[s,p]=setup();p.tool=1;s.useTool(p);const e=s.events.find(e=>e.type==='use');assert.equal(e.endpoints.length,8);assert.equal(p.ammo[1],7);});
+test('针管笔单次精确清除',()=>{const[s,p]=setup();p.tool=2;const e=enemy(0,2);s.enemies=[e];aim(p,e);s.useTool(p);assert.equal(s.enemies.length,0);assert.equal(p.ammo[2],4);});
+test('折纸尺不消耗墨水且不能够到远处',()=>{const[s,p]=setup();p.tool=3;s.enemies=[enemy(0,5)];s.useTool(p);assert.equal(s.enemies.length,1);assert.equal(p.ammo[3],0);});
+test('折纸尺清理近处墨团',()=>{const[s,p]=setup();p.tool=3;const e=enemy(0,11);s.enemies=[e];aim(p,e);s.useTool(p);assert.equal(s.enemies.length,0);});
+test('书本确实阻挡清理射线',()=>{const[s,p]=setup();p.x=6;p.z=10;p.tool=2;const e=enemy(6,-5);s.enemies=[e];aim(p,e);s.useTool(p);assert.equal(e.hp,68);});
+test('补充墨水在倒计时结束后转移储备',()=>{const[s,p]=setup();p.ammo[0]=0;s.reload(p);assert.equal(p.ammo[0],0);for(let i=0;i<100;i++)s.step(1/60);assert.equal(p.ammo[0],28);assert.equal(p.reserve[0],140);});
+test('切换文具会取消补充',()=>{const[s,p]=setup();p.ammo[0]=0;s.reload(p);s.changeTool(p,1);assert.equal(p.reloading,0);assert.equal(p.ammo[0],0);});
+test('零储备不能凭空补给',()=>{const[s,p]=setup();p.ammo[0]=0;p.reserve[0]=0;assert.equal(s.reload(p),false);});
+test('波次能开始并逐步生成墨团',()=>{const[s,p]=setup();s.breakTime=.1;for(let i=0;i<150;i++)s.step(1/60);assert.equal(s.wave,1);assert.equal(s.total,6);assert.ok(s.enemies.length>=2);assert.equal(s.queue+s.enemies.length,6);});
+test('第二波修复纸面并补满文具',()=>{const[s,p]=setup();p.hp=20;p.ammo[0]=1;s.wave=1;s.startWave();assert.equal(s.wave,2);assert.equal(p.hp,38);assert.equal(p.ammo[0],28);});
+test('生成位置不会紧贴玩家或嵌入障碍',()=>{const[s,p]=setup();for(let i=0;i<80;i++){s.spawn();const e=s.enemies.at(-1);assert.ok(Math.hypot(e.x-p.x,e.z-p.z)>10);assert.ok(!BLOCKS.some(b=>Math.abs(e.x-b.x)<b.w/2+.5&&Math.abs(e.z-b.z)<b.d/2+.5));}});
+test('短时间接触只损耗一次纸面',()=>{const[s,p]=setup();p.invulnerable=0;s.enemies=[enemy(0,12.5)];for(let i=0;i<20;i++)s.step(1/60);assert.equal(p.hp,90);});
+test('所有玩家纸面用尽后结算',()=>{const[s,p]=setup();p.hp=0;s.step(1/60);assert.equal(s.ended,true);assert.ok(s.events.some(e=>e.type==='end'));});
+test('多人存活队友使房间继续',()=>{const[s,p]=setup();s.addPlayer('friend');p.hp=0;s.step(1/60);assert.equal(s.ended,false);});
+test('补给恢复纸面及三类墨水',()=>{const[s,p]=setup();p.hp=40;p.reserve=[0,0,0,0];s.drops=[{id:'drop',x:p.x,z:p.z,life:10}];s.step(1/60);assert.equal(p.hp,52);assert.deepEqual(p.reserve,[28,8,5,0]);assert.equal(s.drops.length,0);});
+console.log(`CORE_RESULT ${count}/${count} passed`);

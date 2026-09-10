@@ -102,6 +102,10 @@ node_modules/
 *.rar
 *.7z
 
+# === INKBOUND ===
+games/inkbound/node_modules/
+games/inkbound/tests/screenshots/
+
 # === Secrets and Environment ===
 .env
 .env.local

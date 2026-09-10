@@ -1,0 +1,22 @@
+{
+  "name": "inkbound-multiplayer-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Authoritative WebSocket server for INKBOUND paper wave survival",
+  "main": "server.mjs",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node tests/core-test.mjs && node tests/network-test.mjs",
+    "test:browser": "node tests/browser-test.mjs"
+  },
+  "dependencies": {
+    "ws": "8.18.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "playwright": "1.55.0"
+  }
+}

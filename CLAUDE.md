@@ -1,12 +1,18 @@
-# Claude Code Game Studios -- Game Studio Agent Architecture
+# AkazikGame Studio -- Game Studio Agent Architecture
 
 Indie game development managed through 48 coordinated Claude Code subagents.
 Each agent owns a specific domain, enforcing separation of concerns and quality.
 
+This repository is **AkazikGame Studio**. Playable and in-progress games:
+
+- `games/inkbound/` — INKBOUND (browser / Node WebSocket). Do not treat it as Godot.
+- Repository root (`src/`, `assets/`, `scenes/`, `project.godot`) — V-Tacit, a Godot 4.6 VTuber auto-battler.
+
 ## Technology Stack
 
-- **Engine**: Godot 4.6
-- **Language**: GDScript (primary), C++ via GDExtension (performance-critical)
+- **INKBOUND**: Node.js 20+, browser client, authoritative `ws` server
+- **V-Tacit engine**: Godot 4.6
+- **V-Tacit language**: GDScript (primary), C++ via GDExtension (performance-critical)
 - **Version Control**: Git with trunk-based development
 - **Build System**: SCons (engine), Godot Export Templates
 - **Asset Pipeline**: Godot Import System + custom resource pipeline
