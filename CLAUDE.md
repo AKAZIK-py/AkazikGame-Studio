@@ -8,6 +8,8 @@ This repository is **AkazikGame Studio**. Playable and in-progress games:
 - `games/inkbound/` — INKBOUND (browser / Node WebSocket). Do not treat it as Godot.
 - Repository root (`src/`, `assets/`, `scenes/`, `project.godot`) — V-Tacit, a Godot 4.6 VTuber auto-battler.
 
+Local play: read [`HANDOFF.md`](HANDOFF.md), then the game's HANDOFF. Quote a play URL only after that file's health check passes. Stopping the browser tab does not stop the server.
+
 ## Technology Stack
 
 - **INKBOUND**: Node.js 20+, browser client, authoritative `ws` server

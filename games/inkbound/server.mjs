@@ -47,4 +47,11 @@ let frame=0,last=performance.now();const tick=setInterval(()=>{const now=perform
 const rate=setInterval(()=>{for(const ws of wss.clients)ws.rate=0;},1000);
 const heartbeat=setInterval(()=>{for(const ws of wss.clients){if(!ws.isAlive){ws.terminate();continue;}ws.isAlive=false;ws.ping();}},15000);
 server.listen(PORT,HOST,()=>console.log(`INKBOUND server http://${HOST}:${PORT} — allowed origins: ${allowed.join(', ')}`));
-process.on('SIGTERM',()=>{clearInterval(tick);clearInterval(rate);clearInterval(heartbeat);wss.close();server.close();});
+function shutdown(){
+  clearInterval(tick);clearInterval(rate);clearInterval(heartbeat);
+  wss.close();
+  server.close(()=>process.exit(0));
+  setTimeout(()=>process.exit(0),1500).unref();
+}
+process.on('SIGTERM',shutdown);
+process.on('SIGINT',shutdown);

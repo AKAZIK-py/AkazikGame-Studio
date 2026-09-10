@@ -4,6 +4,8 @@ AKAZIK 的游戏工坊。仓库用来放可运行的游戏，以及共用的制�
 
 以前叫 `Game_Autochess`。GitHub 会把旧地址重定向到这里。
 
+**想玩：** 让你的 agent 读 [`HANDOFF.md`](HANDOFF.md)。它会进到对应游戏的 HANDOFF，把文件落到本机、在固定端口拉起服务，并在你说退出时停掉。不要假设某个 `localhost` 已经在听。
+
 ## 游戏
 
 | 游戏 | 位置 | 状态 | 说明 |
@@ -13,17 +15,13 @@ AKAZIK 的游戏工坊。仓库用来放可运行的游戏，以及共用的制�
 
 ### 纸境 INKBOUND
 
-需要 Node.js 20+。
+玩：agent 执行 [`games/inkbound/HANDOFF.md`](games/inkbound/HANDOFF.md)。固定地址 `http://127.0.0.1:8787`，只有 HANDOFF 里的 health 通过后才算开着。
+
+开发测试：
 
 ```sh
 cd games/inkbound
 npm install
-npm start
-```
-
-浏览器打开 http://127.0.0.1:8787 。单人模式不依赖 WebSocket；`public/` 也可以单独放到静态网页服务器。
-
-```sh
 npm test                 # 核心规则 23 项 + 真实 WebSocket 10 项
 npx playwright install chromium
 npm run test:browser     # 浏览器端到端
@@ -39,6 +37,7 @@ npm run test:browser     # 浏览器端到端
 
 ```
 AkazikGame-Studio/
+├── HANDOFF.md          # 玩：agent 路由
 ├── games/inkbound/     # 纸境：完整网页游戏 + 权威服务器
 ├── src/                # V-Tacit 游戏逻辑
 ├── assets/             # V-Tacit 角色 / 羁绊数据

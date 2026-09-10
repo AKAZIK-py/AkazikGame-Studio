@@ -4,14 +4,16 @@
 
 ## 一分钟本地启动
 
-需要 Node.js 20 或更高版本。在解压后的根目录运行：
+在仓库里玩：让 agent 执行 [`HANDOFF.md`](HANDOFF.md)。固定 `http://127.0.0.1:8787`，health 通过才算开着。
+
+手动启动需要 Node.js 20 或更高版本。在本目录运行：
 
 ```sh
 npm install
-npm start
+HOST=127.0.0.1 PORT=8787 npm start
 ```
 
-浏览器打开 http://127.0.0.1:8787 。单人模式不依赖 WebSocket；客户端 public/ 也能部署到任何静态网页服务器。
+确认 `curl -fsS http://127.0.0.1:8787/health` 返回 `"ok":true` 后再打开该地址。单人模式不依赖 WebSocket；客户端 public/ 也能部署到任何静态网页服务器。玩完用 Ctrl+C 或 HANDOFF 的停止步骤结束进程。
 
 本地联机：分别打开两个浏览器窗口，点击“和朋友同页”，地址填 `ws://127.0.0.1:8787`，输入相同的 6–12 位房间码，即可进入同一个 2–4 人协作房间。
 
